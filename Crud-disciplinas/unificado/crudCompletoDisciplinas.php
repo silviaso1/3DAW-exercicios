@@ -1,4 +1,5 @@
 <?php
+// esse codigo é a união de todo o crud. fiz para deixar mais prático a visualização em uma só página 
 $msg = "";
 $listaDisciplinas = [];
 $totalDisciplinas = 0;

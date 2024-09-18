@@ -1,4 +1,6 @@
 <?php
+
+// esse codigo é a união de todo o crud. fiz para deixar mais prático a visualização em uma só página 
 $msg = "";
 $listaAlunos = [];
 $totalAlunos = 0;
@@ -160,7 +162,7 @@ function processarFormulario() {
         border-radius: 6px;
         border: 1px solid #ddd;
         font-size: 16px;
-        width: calc(100% - 28px); /* Adjusts width to account for padding */
+        width: calc(100% - 28px); 
     }
 
     input[type="text"]:focus {

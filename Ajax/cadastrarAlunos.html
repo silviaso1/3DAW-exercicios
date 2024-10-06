@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Aluno</title>
+    <script>
+        function enviarCadastro() {
+            let nomeAluno = document.getElementById("nomeAluno").value;
+            let cpfAluno = document.getElementById("cpfAluno").value;
+            let matriculaAluno = document.getElementById("matriculaAluno").value;
+            let dataNascimento = document.getElementById("dataNascimento").value;
+
+            let mensagemErro = validarFormulario(nomeAluno, cpfAluno, matriculaAluno, dataNascimento);
+            if (mensagemErro !== "") {
+                document.getElementById("msgErro").innerHTML = mensagemErro;
+                return; 
+            }
+
+
+            let pedidoHttp = new XMLHttpRequest();
+            pedidoHttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("msgErro").innerHTML = this.responseText;
+                }
+            };
+
+            pedidoHttp.open("GET", "incluirAluno.php?nome=" + nomeAluno + "&cpf=" + cpfAluno + 
+                            "&matricula=" + matriculaAluno + "&nascimento=" + dataNascimento, true);
+            pedidoHttp.send();
+        }
+
+        function validarFormulario(nomeAluno, cpfAluno, matriculaAluno, dataNascimento) {
+            let mensagem = "";
+            if (nomeAluno === "") mensagem += "Nome está vazio.<br>";
+            if (cpfAluno === "") mensagem += "CPF está vazio.<br>";
+            if (matriculaAluno === "") mensagem += "Matrícula está vazia.<br>";
+            if (dataNascimento === "") mensagem += "Data de nascimento está vazia.<br>";
+            return mensagem;
+        }
+    </script>
+</head>
+<body>
+    <h1>Cadastro de Aluno</h1>
+    <form id="formCadastroAluno" onsubmit="event.preventDefault(); enviarCadastro();">
+        Nome: <input type="text" id="nomeAluno" required><br><br>
+        CPF: <input type="text" id="cpfAluno" required><br><br>
+        Matrícula: <input type="text" id="matriculaAluno" required><br><br>
+        Data de Nascimento: <input type="date" id="dataNascimento" required><br><br>
+        <input type="button" value="Cadastrar" onclick="enviarCadastro();">
+    </form>
+    <p id="msgErro"></p>
+</body>
+</html>

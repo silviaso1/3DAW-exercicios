@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Pergunta de Múltipla Escolha</title>
+</head>
+<body>
+    <h1>Alterar Pergunta de Múltipla Escolha</h1>
+    <form action="alterar_pergunta.php" method="POST">
+        ID da Pergunta: <input type="text" name="idPergunta" required>
+        <br><br>
+        Nova Pergunta: <input type="text" name="novaPergunta" required>
+        <br><br>
+        A: <input type="text" name="novaEscolhaA" required>
+        <br><br>
+        B: <input type="text" name="novaEscolhaB" required>
+        <br><br>
+        C: <input type="text" name="novaEscolhaC" required>
+        <br><br>
+        D: <input type="text" name="novaEscolhaD" required>
+        <br><br>
+        Nova Resposta Correta:
+        <select name="novaOpcaoCorreta" required>
+            <option value="a">A</option>
+            <option value="b">B</option>
+            <option value="c">C</option>
+            <option value="d">D</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Alterar Pergunta">
+    </form>
+</body>
+</html>

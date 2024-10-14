@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Múltipla Escolha</title>
+</head>
+<body>
+    <h1>Perguntas de Múltipla Escolha</h1>
+    <form id="formCadastro">
+        Pergunta: <input type="text" id="textoPergunta" required>
+        <br><br>
+        A: <input type="text" id="textoEscolhaA" required>
+        <br><br>
+        B: <input type="text" id="textoEscolhaB" required>
+        <br><br>
+        C: <input type="text" id="textoEscolhaC" required>
+        <br><br>
+        D: <input type="text" id="textoEscolhaD" required>
+        <br><br>
+        Resposta correta:
+        <select id="opcaoCorreta" required>
+            <option value="a">A</option>
+            <option value="b">B</option>
+            <option value="c">C</option>
+            <option value="d">D</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Cadastrar Pergunta">
+    </form>
+    <p id="mensagemCadastro"></p>
+
+    <script>
+        document.getElementById('formCadastro').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            
+            const textoPergunta = document.getElementById('textoPergunta').value;
+            const textoEscolhaA = document.getElementById('textoEscolhaA').value;
+            const textoEscolhaB = document.getElementById('textoEscolhaB').value;
+            const textoEscolhaC = document.getElementById('textoEscolhaC').value;
+            const textoEscolhaD = document.getElementById('textoEscolhaD').value;
+            const opcaoCorreta = document.getElementById('opcaoCorreta').value;
+
+            const formData = new FormData();
+            formData.append('textoPergunta', textoPergunta);
+            formData.append('textoEscolhaA', textoEscolhaA);
+            formData.append('textoEscolhaB', textoEscolhaB);
+            formData.append('textoEscolhaC', textoEscolhaC);
+            formData.append('textoEscolhaD', textoEscolhaD);
+            formData.append('opcaoCorreta', opcaoCorreta);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'cadastrarPergunta.php', true);
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById('mensagemCadastro').textContent = xhr.responseText;
+                }
+            };
+
+            xhr.send(formData);
+        });
+    </script>
+</body>
+</html>

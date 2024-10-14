@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excluir Pergunta</title>
+</head>
+<body>
+    <h1>Excluir Pergunta</h1>
+    <form id="formExcluir">
+        Número da Pergunta: <input type="text" id="numeroPergunta" required>
+        <input type="submit" value="Excluir Pergunta">
+    </form>
+    <p id="mensagemDelete"></p>
+
+    <script>
+        document.getElementById('formExcluir').addEventListener('submit', function(e) {
+            e.preventDefault(); // Impede o envio tradicional do formulário
+
+            const numeroPergunta = document.getElementById('numeroPergunta').value;
+
+            const formData = new FormData();
+            formData.append('numeroPergunta', numeroPergunta);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'excluirPergunta.php', true);
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById('mensagemDelete').textContent = xhr.responseText;
+                }
+            };
+
+            xhr.send(formData);
+        });
+    </script>
+</body>
+</html>

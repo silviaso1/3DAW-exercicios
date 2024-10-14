@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Pergunta</title>
+    <script>
+        function buscarPergunta() {
+            const numeroPergunta = document.querySelector('input[name="numeroPergunta"]').value;
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "buscar_pergunta.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("resultado").innerHTML = xhr.responseText;
+                }
+            };
+
+            xhr.send("numeroPergunta=" + numeroPergunta);
+        }
+    </script>
+</head>
+<body>
+    <h1>Buscar Pergunta</h1>
+    
+    Número da Pergunta: <input type="text" name="numeroPergunta" required>
+    <button onclick="buscarPergunta()">Buscar Pergunta</button>
+
+    <div id="resultado"></div>
+</body>
+</html>

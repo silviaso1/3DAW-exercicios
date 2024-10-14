@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Perguntas e Respostas</title>
+    <script>
+        function listarPerguntas() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "listar_perguntas.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("resultado").innerHTML = xhr.responseText;
+                }
+            };
+
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <h1>Listar Perguntas e Respostas</h1>
+    <button onclick="listarPerguntas()">Listar Perguntas e Respostas</button>
+    
+    <div id="resultado"></div>
+</body>
+</html>

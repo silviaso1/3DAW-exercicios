@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Usuário</title>
+    <script>
+        function EnviarFormulario() {
+            let nome = document.getElementById("nome").value;
+            let email = document.getElementById("email").value;
+            let senha = document.getElementById("senha").value;
+
+            if (nome === "" || email === "" || senha === "") {
+                document.getElementById("mensagem").innerHTML = "Todos os campos são obrigatórios.";
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("nome", nome);
+            formData.append("email", email);
+            formData.append("senha", senha);
+
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("mensagem").innerHTML = this.responseText;
+                    console.log("Resposta do servidor: " + this.responseText);
+                }
+            };
+
+            xmlhttp.open("POST", "cadastrarUsuario.php", true);
+
+            xmlhttp.send(formData);
+            console.log("Formulário enviado!");
+        }
+    </script>
+</head>
+<body>
+    <h1>Cadastrar Usuário</h1>
+    <form action="javascript:void(0);" method="POST" onsubmit="EnviarFormulario();">
+        Nome: <input type="text" name="nome" id="nome" required><br><br>
+        Email: <input type="text" name="email" id="email" required><br><br>
+        Senha: <input type="text" name="senha" id="senha" required><br><br>
+        <input type="submit" value="Cadastrar Usuário">
+    </form>
+    <p id="mensagem"></p>
+</body>
+</html>

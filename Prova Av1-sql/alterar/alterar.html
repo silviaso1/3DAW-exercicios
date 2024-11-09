@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Pergunta de Múltipla Escolha</title>
+</head>
+<body>
+    <h1>Alterar Pergunta de Múltipla Escolha</h1>
+    <form id="formAlteracao">
+        ID da Pergunta: <input type="text" id="idPergunta" required>
+        <br><br>
+        Nova Pergunta: <input type="text" id="novaPergunta" required>
+        <br><br>
+        A: <input type="text" id="novaEscolhaA" required>
+        <br><br>
+        B: <input type="text" id="novaEscolhaB" required>
+        <br><br>
+        C: <input type="text" id="novaEscolhaC" required>
+        <br><br>
+        D: <input type="text" id="novaEscolhaD" required>
+        <br><br>
+        Nova Resposta Correta:
+        <select id="novaOpcaoCorreta" required>
+            <option value="a">A</option>
+            <option value="b">B</option>
+            <option value="c">C</option>
+            <option value="d">D</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Alterar Pergunta">
+    </form>
+    <p id="mensagemAlteracao"></p>
+
+    <script>
+        document.getElementById('formAlteracao').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const idPergunta = document.getElementById('idPergunta').value;
+            const novaPergunta = document.getElementById('novaPergunta').value;
+            const novaEscolhaA = document.getElementById('novaEscolhaA').value;
+            const novaEscolhaB = document.getElementById('novaEscolhaB').value;
+            const novaEscolhaC = document.getElementById('novaEscolhaC').value;
+            const novaEscolhaD = document.getElementById('novaEscolhaD').value;
+            const novaOpcaoCorreta = document.getElementById('novaOpcaoCorreta').value;
+
+            const formData = new FormData();
+            formData.append('idPergunta', idPergunta);
+            formData.append('novaPergunta', novaPergunta);
+            formData.append('novaEscolhaA', novaEscolhaA);
+            formData.append('novaEscolhaB', novaEscolhaB);
+            formData.append('novaEscolhaC', novaEscolhaC);
+            formData.append('novaEscolhaD', novaEscolhaD);
+            formData.append('novaOpcaoCorreta', novaOpcaoCorreta);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'alterar_pergunta.php', true);
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById('mensagemAlteracao').textContent = xhr.responseText;
+                }
+            };
+
+            xhr.send(formData);
+        });
+    </script>
+</body>
+</html>

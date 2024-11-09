@@ -1,6 +1,5 @@
 <?php
-// Conexão básica com o banco de dados
-$conexao = new mysqli("localhost", "root", "", "usuarioseperguntas");
+$conexao = new mysqli("localhost", "root", "", "3daw");
 
 if ($conexao->connect_error) {
     die("Falha na conexão");
@@ -14,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $escolhaD = $_POST["textoEscolhaD"];
     $correta = $_POST["opcaoCorreta"];
 
-    // Inserindo dados na tabela
     $sql = "INSERT INTO perguntas_multiplas_escolhas (textoPergunta, textoEscolhaA, textoEscolhaB, textoEscolhaC, textoEscolhaD, opcaoCorreta)
             VALUES ('$pergunta', '$escolhaA', '$escolhaB', '$escolhaC', '$escolhaD', '$correta')";
 

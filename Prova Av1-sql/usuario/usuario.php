@@ -1,6 +1,6 @@
 <?php
 function cadastrarUsuario($nomeUser, $emailUser, $senhaUser) {
-    $conexao = new mysqli("localhost", "root", "", "usuarioseperguntas");
+    $conexao = new mysqli("localhost", "root", "", "3daw");
 
     if ($conexao->connect_error) {
         return "Erro ao conectar ao banco de dados.";
